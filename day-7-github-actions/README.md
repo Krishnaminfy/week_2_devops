@@ -18,6 +18,10 @@ Adding secret variables inside the settings of github repository.
 
 # Actions tab
 
+These screenshots are from different, repository, to make it convenient for evaluation, I pulled that repo and pushed it to this repository. That is the reason you will not see any actions in this repo.
+
+By following this link you can see my github actions, (https://github.com/Krishnaminfy/day-7-github-actions-takehome-/actions)
+
 
 checking if my yaml code is working correct or not
 <img width="960" alt="7" src="https://github.com/user-attachments/assets/6974d8a8-b42a-4f25-ae46-93dc1d99279a" />
