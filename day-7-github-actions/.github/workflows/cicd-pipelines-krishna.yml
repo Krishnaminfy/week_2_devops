@@ -1,0 +1,61 @@
+name: Full CI/CD Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+env:
+  IMAGE_NAME: ghcr.io/krishnaminfy/day-7-github-actions-takehome
+
+jobs:
+  build:
+    name: Build and Push Docker Image
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: |
+            ghcr.io/krishnaminfy/day-7-github-actions-takehome:latest
+          build-args: |
+            APP_VERSION=${{ github.sha }}
+
+  deploy:
+    name: Deploy to EC2
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to EC2 instance via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          port: 22
+          script: |
+            echo ${{ secrets.GHCR_PAT }} | docker login ghcr.io -u ${{ github.repository_owner }} --password-stdin
+
+            docker pull ghcr.io/krishnaminfy/day-7-github-actions-takehome:latest
+
+            docker stop my-app-container || true
+            docker rm my-app-container || true
+
+            docker run -d --name my-app-container --restart always -p 3000:3000 ghcr.io/krishnaminfy/day-7-github-actions-takehome:latest
+
+            docker image prune -a -f

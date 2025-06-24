@@ -1,0 +1,20 @@
+# deployment.yaml
+apiVersion: apps/v1     # Deployments are in the 'apps/v1' API group.
+kind: Deployment        # The type of object.
+metadata:
+  name: nginx-deployment
+spec:
+  replicas: 2           # <-- The magic! We tell Kubernetes we want 2 copies of our Pod.
+  selector:
+    matchLabels:
+      app: nginx      # This tells the Deployment which Pods to manage. It must match the Pod's labels.
+  template:             # This is the blueprint for the Pods the Deployment will create.
+    metadata:
+      labels:
+        app: nginx    # The label for the Pods.
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.14.2
+        ports:
+        - containerPort: 80
