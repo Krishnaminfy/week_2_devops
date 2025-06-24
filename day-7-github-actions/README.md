@@ -11,13 +11,18 @@ I used terraform code to launch the ec2 instance, which I previously used in the
 # docker version
 <img width="959" alt="12" src="https://github.com/user-attachments/assets/a925a726-3c36-43d6-9d05-3d6dd8d8b972" />
 
-adding secret variables inside the settings of github repo 
+Adding secret variables inside the settings of github repository. 
+
 <img width="960" alt="5" src="https://github.com/user-attachments/assets/3988eb85-4175-4d29-a884-44b664af18d3" />
 <img width="960" alt="6" src="https://github.com/user-attachments/assets/7db8c2a3-86dc-4a22-8bf4-1922f5744589" />
+
 # Actions tab
+
+
 checking if my yaml code is working correct or not
 <img width="960" alt="7" src="https://github.com/user-attachments/assets/6974d8a8-b42a-4f25-ae46-93dc1d99279a" />
- Doing some changes, which can be the issue and again trying.
+
+Doing some changes, which can be the issue and again trying.
 <img width="958" alt="8" src="https://github.com/user-attachments/assets/c084085f-ac92-426e-b003-30c8eb070a70" />
 
 <img width="959" alt="9" src="https://github.com/user-attachments/assets/8b3dc3f5-a736-422e-a108-19277136fd07" />
